@@ -12,7 +12,7 @@ class Point:
 
 def input_file():
     global n,Plan,start,end,direction,ballr
-    f = open('input','r')
+    f = open('inputGame','r')
     n = int(f.readline())
     Plan = [([0 for x in range(n)]) for y in range(n)]
     k = int(f.readline())
@@ -89,7 +89,7 @@ def find():
                                 print_path(h)
                                 find = 1
     if find != 1:
-        print "No solution!"
+        print ("No solution!")
     return;
 
 global n,s,Plan,start,end,direction,D,l                                  
