@@ -25,8 +25,8 @@ def input_file():
                     if ((i * i + j * j) <= l[2] * l[2] and (l[0] + i) >= 0 and (l[0] + i) < n and (l[1] + j) >= 0 and l[1] + j < n):
                         Plan[l[0]+i][l[1]+j] = 1
         else:
-            for i in range(l[0],l[0]+l[3]):
-                for j in range(l[1],l[1]+l[2]):
+            for i in range(l[0],l[0]+l[2]):
+                for j in range(l[1],l[1]+l[3]):
                     Plan[i][j] = 1;
 
     l = f.readline().split(' ')
