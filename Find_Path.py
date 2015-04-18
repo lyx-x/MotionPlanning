@@ -53,13 +53,17 @@ def check(x,y):
         for j in range(y - ballr+1,y+ballr ):
             if (i>=0 and j>=0 and i<n and j<n):
                 if Plan[i][j]!=0:
-                    return False
-    return True;
+                    return 1
+    return 0;
                    
 def find():
-    global n,s,Plan,start,end,direction,D,l
+    global n,s,Plan,start,end,direction,D,l,ch
     l = [start]
     D = [([0 for x in range(n)]) for y in range(n)]
+    ch = [([0 for x in range(n)]) for y in range(n)]
+    for i in range(n):
+        for j in range(n):
+            ch[i][j] = check(i,j)
     D[start.x][start.y] = 1
     find = 0
     h = 1
@@ -68,12 +72,12 @@ def find():
         refresh = False
         for i in range(n):
             for j in range(n):
-                for p in direction:
-                    if (check(i,j) and i + p[0] >=0 and i + p[0] < n and j + p[1] >=0 and j + p[1] < n):
-                        r = D[i+p[0]][j+p[1]]
+                for k in range(8):
+                    if (ch[i][j] == 0 and i + direction[k][0] >=0 and i + direction[k][0] < n and j + direction[k][1] >=0 and j + direction[k][1] < n):
+                        r = D[i+direction[k][0]][j+direction[k][1]]
                         if r != 0:
                             if D[i][j] == 0:
-                                l.insert(h,Point(i,j,l[r-1].w+1,r))
+                                l.append(Point(i,j,l[r-1].w+1,r))
                                 h = h + 1
                                 D[i][j] = h
                                 refresh = True
