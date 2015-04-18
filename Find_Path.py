@@ -20,8 +20,8 @@ def input_file():
         s = f.readline()
         l = [int(x) for x in s.split(' ')]
         if (len(l) == 3):
-            for i in range(-l[2],l[2]+1):
-                for j in range(-l[2],l[2]+1):
+            for i in range(-l[2]+1,l[2]):
+                for j in range(-l[2]+1,l[2]):
                     if ((i * i + j * j) <= l[2] * l[2] and (l[0] + i) >= 0 and (l[0] + i) < n and (l[1] + j) >= 0 and l[1] + j < n):
                         Plan[l[0]+i][l[1]+j] = 1
         else:
@@ -49,8 +49,8 @@ def print_path( h ):
       
 def check(x,y):
     global n,s,Plan,start,end,direction,D,l,ballr
-    for i in range(x - ballr,x+ballr + 1):
-        for j in range(y - ballr,y+ballr + 1):
+    for i in range(x - ballr+1,x+ballr ):
+        for j in range(y - ballr+1,y+ballr ):
             if (i>=0 and j>=0 and i<n and j<n):
                 if Plan[i][j]!=0:
                     return False
