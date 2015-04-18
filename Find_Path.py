@@ -30,9 +30,9 @@ def input_file():
                     Plan[i][j] = 1;
 
     l = f.readline().split(' ')
-    start = Point(int(l[0]),int(l[1]),0,-1)
-    l = f.readline().split(' ')
     end = Point(int(l[0]),int(l[1]),0,-1)
+    l = f.readline().split(' ')
+    start = Point(int(l[0]),int(l[1]),0,-1)
     ballr = int(f.readline())
     direction = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]
     return;
