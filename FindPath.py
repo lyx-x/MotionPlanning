@@ -49,8 +49,8 @@ def print_path( h ):
       
 def check(x,y):
     global n,s,Plan,start,end,direction,D,l,ballr
-    for i in range(x - ballr+1,x+ballr ):
-        for j in range(y - ballr+1,y+ballr ):
+    for i in range(x -int(ballr/2)-1,x+int(ballr/2)+1 ):
+        for j in range(y-int(ballr/2)-1,y+int(ballr/2)+1 ):
             if (i>=0 and j>=0 and i<n and j<n):
                 if Plan[i][j]!=0:
                     return 1
@@ -66,28 +66,31 @@ def find():
             ch[i][j] = check(i,j)
     D[start.x][start.y] = 1
     find = 0
-    h = 1
+    t = 1
+    h = 0
     refresh = True
     while refresh and find == 0:
         refresh = False
-        for i in range(n):
-            for j in range(n):
-                for k in range(8):
-                    if (ch[i][j] == 0 and i + direction[k][0] >=0 and i + direction[k][0] < n and j + direction[k][1] >=0 and j + direction[k][1] < n):
-                        r = D[i+direction[k][0]][j+direction[k][1]]
-                        if r != 0:
-                            if D[i][j] == 0:
-                                l.append(Point(i,j,l[r-1].w+1,r))
-                                h = h + 1
-                                D[i][j] = h
-                                refresh = True
-                            elif l[D[i][j]- 1].w > l[r-1].w + 1:
-                                l[D[i][j] - 1].w = l[r-1].w + 1
-                                l[D[i][j] - 1].p = r
-                                refresh = True
-                            if i == end.x and j == end.y:
-                                print_path(h)
-                                find = 1
+        for u in range(h,t):
+            for k in range(8):
+                i = l[u].x + direction[k][0]
+                j = l[u].y + direction[k][1]
+                add = abs(direction[k][0])+abs(direction[k][1])
+                if (i >=0 and j >=0 and i<n and j<n and ch[i][j] == 0):
+                    r = D[i][j]
+                    if r == 0:
+                        l.append(Point(i,j,l[u].w+add,D[l[u].x][l[u].y]))
+                        t = t + 1
+                        D[i][j] = t
+                        refresh = True
+                    elif l[r - 1].w > l[u].w + add:
+                        l[r - 1].w = l[u].w + add
+                        l[r - 1].p = D[l[u].x][l[u].y]
+                        refresh = True
+                    if i == end.x and j == end.y:
+                        print_path(t)
+                        find = 1
+        h = h + 1
     if find != 1:
         print ("No solution!")
     return;
